@@ -129,17 +129,13 @@
   <ItemGroup>
     <ClCompile Include="CinCheck.cpp" />
     <ClCompile Include="ClassEngine.cpp" />
-    <ClCompile Include="DynamicMassive.cpp" />
     <ClCompile Include="EngineApplication.cpp" />
-    <ClCompile Include="Find.cpp" />
     <ClCompile Include="MainFunction.cpp" />
     <ClCompile Include="SaveOpen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CinCheck.h" />
     <ClInclude Include="ClassEngine.h" />
-    <ClInclude Include="DynamicMassive.h" />
-    <ClInclude Include="Find.h" />
     <ClInclude Include="SaveOpen.h" />
     <ClInclude Include="MainFunction.h" />
   </ItemGroup>

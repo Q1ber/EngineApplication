@@ -4,7 +4,7 @@
 #include <string>
 
 using namespace std;
-
+//Функция проверки ввода на наличие символов
 string CinCheck(string Name) 
 {
     int Value = 0;
@@ -37,6 +37,7 @@ string CinCheck(string Name)
 
         if (Value > 0)
         {
+            //Преобразование числа в строку и возврат её
             StringValue = std::to_string(Value);
             return StringValue;
         }
