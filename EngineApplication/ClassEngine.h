@@ -16,6 +16,7 @@ public:
 	void Header(int i, std::string NameHeader);                          //Функция заголовока для удобства
 	std::string Change(std::string Name, bool flag);                     //Функция для замены значения
 	std::string Select(std::string var1, std::string var2);              //Функция для выбора типа
+	void WriteReturn(Engine *engine,int n, std::string line, std::string Value);             //Функция для записи значения
 	std::string Get(int n);                                              //Функция возврата значения из private
 	void Add();                                                          //Функция добавления двигателя
 	int Cout(Engine engine[], int n, std::string NameHeader,int flag);   //Функция вывода двигателя

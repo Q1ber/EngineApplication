@@ -56,6 +56,17 @@ string Engine::Get(int n)
 	if (n == 8)   return Mass;
 }
 
+void Engine::WriteReturn(Engine *engine,int n, string line, string Name)
+{
+	if (Name == "A") engine[n].Name = line;
+	if (Name == "T") engine[n].Type = line;
+	if (Name == "P") engine[n].Power = line;
+	if (Name == "V") engine[n].Voltage = line;
+	if (Name == "C") engine[n].Current = line;
+	if (Name == "R") engine[n].RPM = line;
+	if (Name == "E") engine[n].EFF = line;
+	if (Name == "M") engine[n].Mass = line;
+}
 
 void Engine::Add()
 {

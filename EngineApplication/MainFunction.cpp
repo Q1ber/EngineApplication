@@ -30,6 +30,7 @@ void Menu()
 		cout << "[5] - Найти электрический двигатель"               << endl;
 		cout << "[6] - Сохранить данные в базу"                     << endl;
 		cout << "[7] - Выгрузить базу данных"                       << endl;
+		cout << "[8] - Удалить базу данных"                         << endl;
 		cout << "~Для выхода из программы нажмите ESC~"             << endl;
 		operation = _getch();
 		//Свитч для выбора дальнейшего действия
@@ -72,7 +73,10 @@ void Menu()
 		}
 		//Открытие файла
 		case 55:
-			OpenFile(MassEngine);
+			n = OpenFile(MassEngine);
+			break;
+		case 56:
+			DeleteFile();
 			break;
 		}
 	}
