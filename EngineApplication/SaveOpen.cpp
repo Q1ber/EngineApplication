@@ -19,20 +19,19 @@ void CreateFile( Engine engine[], int n)
 	getline(cin, Name);
 
 	ofstream FileEngine(Name + ".txt");
+	FileEngine << "[Num]" << "/" << n << "/" << endl;
 	for (int i = 0; i<n; ++i)
 	{ 
 		FileEngine 
-		<< "--------------------------------------------------"                            << endl 
-		<< "Двигатель №"             << i+1 << "|" <<                     "|"              << endl
-		<< "Название двигателя: "           << "|" << engine[i].Get(1) << "|"              << endl
-		<< "Род тока: "                     << "|" << engine[i].Get(2) << "|"              << endl
-		<< "Мощность: "                     << "|" << engine[i].Get(3) << "|" << " кВт"    << endl
-		<< "Номинальное напряжение: "       << "|" << engine[i].Get(4) << "|" << " В"      << endl
-		<< "Номинальный ток: "              << "|" << engine[i].Get(5) << "|" << " А"      << endl
-		<< "Номинальная частота вращения: " << "|" << engine[i].Get(6) << "|" << " об/мин" << endl
-		<< "КПД: "                          << "|" << engine[i].Get(7) << "|" << " %"      << endl
-		<< "Масса: "                        << "|" << engine[i].Get(8) << "|" << " кг"     << endl
-		<< "--------------------------------------------------"                            << endl;
+		<< "NL"                                      << endl 
+		<< "[N]"   << "/" << engine[i].Get(1) << "/" << endl
+		<< "[T]"   << "/" << engine[i].Get(2) << "/" << endl
+		<< "[P]"   << "/" << engine[i].Get(3) << "/" << endl
+		<< "[V]"   << "/" << engine[i].Get(4) << "/" << endl
+		<< "[C]"   << "/" << engine[i].Get(5) << "/" << endl
+		<< "[R]"   << "/" << engine[i].Get(6) << "/" << endl
+		<< "[E]"   << "/" << engine[i].Get(7) << "/" << endl
+		<< "[M]"   << "/" << engine[i].Get(8) << "/" << endl;
 	}
 	FileEngine.close();
 
@@ -44,8 +43,10 @@ int OpenFile(Engine engine[])
 {
 	string NameFile;
 	string line;
+	string copyS;
+	int sIn = 0, sOut = 0;
+	int n = -1;
 	char c = 0;
-	int count = 0;
 
 	cout << "Введите имя файла, который хотите открыть: ";
 
@@ -57,6 +58,24 @@ int OpenFile(Engine engine[])
 	{
 		while (getline(in, line))
 		{
+			if (line.find("Num"))
+			{
+				sIn = line.find("/") + 1;
+				sOut = line.find("/", sIn);
+				copyS = {};
+				for (sIn; sIn < sOut; sIn++) copyS += line[sIn];
+				cout << "Количество записей в файле: " << copyS;
+			}
+			if (line.find("NL")) n++;
+			if (line.find("N"))
+			{
+				sIn = line.find("/") + 1;
+				sOut = line.find("/", sIn);
+				for (sIn; sIn < sOut; sIn++) copyS += line[sIn];
+
+
+			}
+
 			cout << line << endl;
 		}
 	}

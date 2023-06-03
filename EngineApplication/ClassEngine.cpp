@@ -87,25 +87,28 @@ int Engine::Cout(Engine engine[], int n, string NameHeader, int flag)
 	
 	if (flag == 3) { i = n; n++; }
 
-	for(i; i < n; ++i)
+	for (i; i < n; ++i)
 	{
 		Header(i, NameHeader);
-		cout << "Название: "                     << engine[i].Name                 << endl;
-		cout << "Род тока: "                     << engine[i].Type                 << endl;
-		cout << "Мощность: "                     << engine[i].Power   << " кВт"    << endl;
-		cout << "Номинальное напряжение: "       << engine[i].Voltage << " В"      << endl;
-		cout << "Номинальный ток: "              << engine[i].Current << " А"      << endl;
-		cout << "Номинальная частота вращения: " << engine[i].RPM     << " об/мин" << endl;
-		cout << "КПД: "                          << engine[i].EFF     << " %"      << endl;
-		cout << "Масса: "                        << engine[i].Mass    << " кг"     << endl;
+		cout << "Название: " << engine[i].Name << endl;
+		cout << "Род тока: " << engine[i].Type << endl;
+		cout << "Мощность: " << engine[i].Power << " кВт" << endl;
+		cout << "Номинальное напряжение: " << engine[i].Voltage << " В" << endl;
+		cout << "Номинальный ток: " << engine[i].Current << " А" << endl;
+		cout << "Номинальная частота вращения: " << engine[i].RPM << " об/мин" << endl;
+		cout << "КПД: " << engine[i].EFF << " %" << endl;
+		cout << "Масса: " << engine[i].Mass << " кг" << endl;
 		cout << "--------------------------------------------------------------------" << endl;
+		if (i == n) {cout << "Выход в главное меню" << endl; system("pause");}
+		//Вывод
+		if (flag == 0) system("pause");
 		//Редактор
 		if (flag == 1)
 		{
 			cout << "Для выбора двигателя нажмите Enter" << endl;
 			cout << "Следующая запись Пробел" << endl;
 			key = _getch();
-			if (key == 13) { N = i; engine->Edit(engine[N]); break; };
+			if (key == 13) { N = i; engine->Edit(engine[N]); break; }
 		}
 		//Уничтожитель
 		if (flag == 2)
@@ -124,11 +127,10 @@ int Engine::Cout(Engine engine[], int n, string NameHeader, int flag)
 				system("cls");
 				cout << "Запись успешно удалена" << endl;
 				system("pause");
-				return n-1;
+				return 1;
 			}
-			if (key == 8) return 0;
+			if (key == 8) return 2;
 		}
-		system("pause");
 	}
 }
 
@@ -182,6 +184,7 @@ void Engine::Find(Engine engine[], int n)
 	int position = 0;
 	string UserSearch = "";
 	int UserSearchNum = 0;
+	bool FindSucces = false;
 
 	system("cls");
 	cout << "---------------------------Найти двигатель-----------------------------" << endl;
@@ -211,7 +214,15 @@ void Engine::Find(Engine engine[], int n)
 		cout << "Поиск по имени" << endl;
 		cout << "Введите ваш запрос:";
 		getline(cin, UserSearch);
-		for (int i = 0; i < n; ++i) if (engine[i].Get(key) == UserSearch) engine->Cout(engine, i, "Результаты поиска:", 3);
+		for (int i = 0; i < n; ++i)
+		{
+			if (engine[i].Get(key) == UserSearch)
+			{
+				engine->Cout(engine, i, "Результаты поиска:", 3);
+				FindSucces = true;
+			}
+		}
+		if (!FindSucces) cout << "Двигатель с необходимыми параметрами не найден" << endl;
 	}
 	//Поиск по типу
 	else if (key == 2)
@@ -219,7 +230,15 @@ void Engine::Find(Engine engine[], int n)
 		system("cls");
 		cout << "Поиск по типу" << endl;
 		string UserSearch = Select("Постоянный", "Переменный");
-		for (int i = 0; i < n; ++i) if (engine[i].Get(key) == UserSearch) engine->Cout(engine, i, "Результаты поиска:", 3);
+		for (int i = 0; i < n; ++i)
+		{
+			if (engine[i].Get(key) == UserSearch)
+			{
+				engine->Cout(engine, i, "Результаты поиска:", 3);
+				FindSucces = true;
+			}
+		}
+		if (!FindSucces) cout << "Двигатель с необходимыми параметрами не найден" << endl;
 	}
 	//Числовой поиск
 	else if (key >= 3 and key <= 8)
@@ -238,10 +257,33 @@ void Engine::Find(Engine engine[], int n)
 		for (int i = 0; i < n; ++i)
 		{
 			ValueEngine = stoi(engine[i].Get(key));
-			if (position == 49) if (ValueEngine == UserSearchNum) engine->Cout(engine, i, "Результаты поиска:", 3);
-			if (position == 50) if (ValueEngine > UserSearchNum)  engine->Cout(engine, i, "Результаты поиска:", 3);
-			if (position == 51) if (ValueEngine < UserSearchNum)  engine->Cout(engine, i, "Результаты поиска:", 3);
+			if (position == 49)
+			{
+				if (ValueEngine == UserSearchNum)
+				{
+					engine->Cout(engine, i, "Результаты поиска:", 3);
+					FindSucces = true;
+				}
+			}
+			if (position == 50)
+			{
+				if (ValueEngine > UserSearchNum)
+				{
+					engine->Cout(engine, i, "Результаты поиска:", 3);
+					FindSucces = true;
+				}
+			}
+			if (position == 51)
+			{
+				if (ValueEngine < UserSearchNum)
+				{
+					engine->Cout(engine, i, "Результаты поиска:", 3);
+					FindSucces = true;
+				}
+			}
 		}
+		if (!FindSucces) cout << "Двигатель с необходимыми параметрами не найден" << endl;
 	}
-	else cout << "Неверная цифра" << endl;
+	else cout << "Возврат в главное меню" << endl;
+	system("pause");
 }

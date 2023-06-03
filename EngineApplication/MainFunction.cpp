@@ -14,6 +14,8 @@ void Menu()
 	int operation = 0;
 	//Число элементов массива
 	int n = 0;
+	//Флаг удаления 
+	int flag = 0;
 	//Инициализация массива
 	Engine MassEngine[100];
 	//Вывод главного меняю, пока не нажали ESC
@@ -51,7 +53,9 @@ void Menu()
 		//Удаление двигателей
 		case 52:
 		{
-			n = MassEngine->Cout(MassEngine, n, "Уничтожитель", 2);
+			flag = MassEngine->Cout(MassEngine, n, "Уничтожитель", 2);
+			if (flag == 1) n--;
+			if (flag == 2) n = 0;
 			break;
 		}
 		//Поиск двигателей
